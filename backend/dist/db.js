@@ -62,11 +62,11 @@ const todoSchema = new mongoose_1.Schema({
         required: true
     },
     completed: {
-        type: String,
+        type: Boolean,
         default: false
     }
 });
 const User = mongoose_1.default.model("user", userSchema);
 exports.User = User;
-const Todo = mongoose_1.default.model("tood", todoSchema);
+const Todo = mongoose_1.default.model("todo", todoSchema);
 exports.Todo = Todo;

@@ -30,16 +30,16 @@ function tokenMiddleware(req, res, next) {
         if (!key) {
             throw new Error("Provide Key");
         }
-        const { userid } = jsonwebtoken_1.default.verify(token, key);
+        const { userId } = jsonwebtoken_1.default.verify(token, key);
         //string{jwt.verify(token,key)} 
-        if (!userid) {
+        if (!userId) {
             res.status(401).json({
                 message: "Please Login"
             });
             return;
         }
         // req.userId=userid;
-        res.locals.userId = userid;
+        res.locals.userId = userId;
         next();
     });
 }

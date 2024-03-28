@@ -76,7 +76,7 @@ router.post("/signin",async(req:Request,res:Response)=>{
        })
 
        if(!existuser){
-        res.status(401).json({
+       return res.status(401).json({
             message:"Wrong Credentials"
         })
        }
@@ -105,7 +105,7 @@ router.post("/signin",async(req:Request,res:Response)=>{
 })
 
 
-
+//prac
 router.get("/",async(req:Request,res:Response)=>{
     res.json({
         message:"hello from user"

@@ -25,8 +25,9 @@ router.post("/create",tokenMiddleware,async(req:Request,res:Response)=>{
         const newTodo=await Todo.create({
             title:body.title,
             description:todo.description,
-            tage:body.tag
+            tag:body.tag
         })
+      
         await User.updateOne({_id:id},{
             $push:{
                 todos:newTodo._id
@@ -59,14 +60,16 @@ router.post("/update/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
     const id=res.locals.userId;
     try{
         await todo.parseAsync(body);
-
+        
     const user=await User.findOne({_id:id})
+    
     if(!user){
         return res.status(404).json({
             message:"User not exists"
         })
     }
-    const newTodo=await Todo.updateMany({_id:todoId},
+   
+    const newTodo=await Todo.updateOne({_id:todoId},
         {
             $set:{
                 title:body.title,
@@ -74,6 +77,9 @@ router.post("/update/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
                 tag:body.tag,
                 completed:body.completed
             }
+        })
+        return res.json({
+            message:"Updated Successfully"
         })
     }catch(error){
         if(error instanceof ZodError){
@@ -90,7 +96,7 @@ router.post("/update/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
 //delete
 
 router.post("/delete/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
-    const todoId=req.params.todoId
+    const todoId=req.params.todoid
     const id=res.locals.userId
     try{
         const user=await User.findOne({_id:id})
@@ -106,8 +112,21 @@ router.post("/delete/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
         //         }
         //     }
         //     )
+        let deletedTodo=await Todo.findOne({_id:todoId});
+        if(!deletedTodo){
+            return res.json({
+                message:"Todo not  found"
+            })
+        }
 
-        const deletedTodo=await Todo.deleteOne({_id:todoId})
+        deletedTodo=await Todo.deleteOne({_id:todoId})
+        await User.updateOne({_id:id},
+            {
+                $pull:{
+                    todos:todoId
+                }
+            })
+
         res.json({
             message:"todo deleted"
         })
@@ -121,9 +140,13 @@ router.post("/delete/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
 
 //get todo
 router.get("/get",tokenMiddleware,async(req:Request,res:Response)=>{
-    const id=res.locals.userId;
-    const todo=await User.find({_id:id}).populate("todos")
-    return res.json({todo})
+    const id = res.locals.userId;
+    console.log(id)
+    const user = await User.findById(id).populate("todos");
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+    return res.json({ todos: user });
 })
 
 

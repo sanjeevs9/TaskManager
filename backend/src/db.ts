@@ -1,5 +1,6 @@
 import mongoose,{Schema} from "mongoose"
 import * as dotenv from "dotenv"
+
 dotenv.config()
 
 mongoose.connect(`${process.env.DATABASE}`)
@@ -41,12 +42,13 @@ const todoSchema =new Schema({
         required:true
     },
     completed:{
-        type:String,
+        type:Boolean,
         default:false
     }
 })
 
 const User=mongoose.model("user",userSchema)
-const Todo=mongoose.model("tood",todoSchema)
+const Todo=mongoose.model("todo",todoSchema)
+
 
 export{User,Todo}

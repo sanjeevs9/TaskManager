@@ -84,7 +84,7 @@ router.post("/signUp", (req, res) => __awaiter(void 0, void 0, void 0, function*
             });
         }
         res.json({
-            message: error
+            message: "Backend Issue"
         });
     }
 }));
@@ -98,7 +98,7 @@ router.post("/signin", (req, res) => __awaiter(void 0, void 0, void 0, function*
             password: body.password
         });
         if (!existuser) {
-            res.status(401).json({
+            return res.status(401).json({
                 message: "Wrong Credentials"
             });
         }
@@ -120,11 +120,12 @@ router.post("/signin", (req, res) => __awaiter(void 0, void 0, void 0, function*
         }
         else {
             res.json({
-                message: error
+                message: "Backend Issue"
             });
         }
     }
 }));
+//prac
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({
         message: "hello from user"
