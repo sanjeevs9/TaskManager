@@ -9,6 +9,9 @@ export default {
       fontFamily:{
         kalam:["Kalam",'sans-serif'],
         foundation:["Foundation","sans-serif"]
+      },
+      animation: {
+        'lineThrough': 'lineThrough 10s linear'
       }
     },
   },

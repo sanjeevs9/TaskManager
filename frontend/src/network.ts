@@ -1,0 +1,1 @@
+export const network="http://localhost:3000"

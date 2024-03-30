@@ -3,6 +3,10 @@ import './App.css'
 import { Route,Routes,BrowserRouter } from 'react-router-dom'
 import Card from './components/Card'
 import Edit from './components/Edit'
+import Home from './components/Home'
+import Todo from './components/Todo'
+import Signup from './components/SignUp'
+import Signin from './components/Signin'
 
 function App() {
 
@@ -10,7 +14,10 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Card/>}></Route>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/todo' element={<Todo/>}/>
+      <Route path="/signup" element={<Signup/>}/>
+      <Route path="/signin" element={<Signin/>}/>
     </Routes>
     </BrowserRouter>
       
