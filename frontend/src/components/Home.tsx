@@ -101,7 +101,7 @@ async function verifyJwt(){
             <div className="pt-20">
               <button
                 onClick={verifyJwt}
-                className=" bg-[#69665c] px-5 fw-bold p-2 w-40 text-white font-semibold rounded-md"
+                className=" bg-[#69665c] px-6 fw-bold p-2 w-40 text-white font-semibold rounded-md "
               >
                 Get Started
               </button>

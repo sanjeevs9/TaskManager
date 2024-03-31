@@ -125,6 +125,23 @@
 
 
 
+.hover-effect {
+  border: 1px solid transparent; /* Ensure the border width is already included in the default button size */
+  transition: border-color 0.3s ease; /* Add transition for smooth effect */
+}
+
+.hover-effect:hover {
+  border-color: #69665c; /* Change border color on hover */
+}
+
+
+
+
+
+
+
+
+
 
 
 
