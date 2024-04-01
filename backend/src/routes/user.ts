@@ -67,6 +67,7 @@ const token =jwt.sign({userId},key);
 //signin
 router.post("/signin",async(req:Request,res:Response)=>{
     const body = req.body;
+    console.log(body)
     try{
        await user.parseAsync(body);
         

@@ -9,22 +9,26 @@ const key =process.env.SECRET_KEY;
 export async function tokenMiddleware(req:Request,res:Response,next:NextFunction){
     let token =req.headers.authorization;
     
-
+    console.log(token+"tokennnnnnn")
     if(!token || !token.startsWith("Bearer ")){
         res.status(401).json({
-            messgae:"Please Login"
+            message:"Please Login"
         })
         return
     }
+   
     token=token.split(" ")[1];
     
     if(!key){
         throw new Error("Provide Key")
     }
-    const {userId}=jwt.verify(token,key) as string as unknown as {userId:string};
    
+    try{
+        const {userId}=jwt.verify(token,key) as string as unknown as {userId:string};
+      
     //string{jwt.verify(token,key)} 
     if(!userId){
+       
         res.status(401).json({
             message:"Please Login"
         })
@@ -32,5 +36,13 @@ export async function tokenMiddleware(req:Request,res:Response,next:NextFunction
     }
         // req.userId=userid;
      res.locals.userId=userId;
+     
      next();
+    }catch(err){
+        res.status(401).json({
+            message:"Please Login"
+        })
+        return
+    }
+    
 }

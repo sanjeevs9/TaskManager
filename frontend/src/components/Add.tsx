@@ -1,13 +1,49 @@
+import axios from "axios"
 import { useState } from "react"
+import { network } from "../network"
 
-export default function Add({editOpen,handleditOpen}: {editOpen: boolean,handleditOpen:Function}) {
+export default function Add({editOpen,handleditOpen,addState}: {editOpen: boolean,handleditOpen:Function,addState:Function}) {
     if(!editOpen){
         return
     }
     const [data, setdata] = useState({ title: "", description: "" })
+    const[selecttag,setSelectedtag]=useState("work");
+    const token =localStorage.getItem("token")
+    const addUrl=`${network}/api/todo/create`
+
+    async function handleClick(){
+        // console.log(data)
+        // const value={
+        //     title:data.title,
+        //     description:data.description,
+        //     tag:selecttag,
+        //     completed:false,
+        // }
+        await axios.post(`${addUrl}`,{
+            title:data.title,
+            description:data.description,
+            tag:selecttag,
+            completed:false
+        },{
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        }).then(res=>{
+            console.log(res.data.newTodo)
+            addState(res.data.newTodo)
+            alert(res.data.message)
+            handleditOpen()
+            
+        }).catch(error=>{
+            console.log(error)
+            alert(error.response.data.message)
+            handleditOpen()
+        })
+    }
 
     return (
         <>
+        
             <div className="z-50 bg-transparent items-center justify-center flex fixed inset-0 backdrop-brightness-50 backdrop-opacity-100">
 
                 <div className="w-[30rem] h-28rem] bg-white rounded-lg">
@@ -28,7 +64,7 @@ export default function Add({editOpen,handleditOpen}: {editOpen: boolean,handled
                                     Title
                                 </div>
 
-                                <input className="p-2 border rounded-md" placeholder="ff" >
+                                <input className="p-2 border rounded-md" placeholder="" onChange={(e)=>{setdata({...data,title:e.target.value})}}>
                                 </input>
                             </div>
                             <div className="flex flex-col pl-3 pr-3 gap-1">
@@ -36,7 +72,7 @@ export default function Add({editOpen,handleditOpen}: {editOpen: boolean,handled
                                     Description
                                 </div>
 
-                                <textarea className="p-2 border rounded-md" placeholder="ff"></textarea>
+                                <textarea className="p-2 border rounded-md" placeholder="" onChange={(e)=>{setdata({...data,description:e.target.value})}}></textarea>
                             </div>
                             <div className="flex flex-col pl-3 pr-3 gap-1">
                                 <div className="text-left">
@@ -44,11 +80,12 @@ export default function Add({editOpen,handleditOpen}: {editOpen: boolean,handled
                                 </div>
                                 <form className="w-full mx-auto">
 
-                                    <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                        <option value="US">work</option>
-                                        <option value="CA">Life</option>
-                                        <option value="FR">Important</option>
-                                        <option value="">Others</option>
+                                    <select id="tag" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    onChange={(e)=>{setSelectedtag(e.target.value)}}>
+                                        <option value="work">Work</option>
+                                        <option value="life">Life</option>
+                                        <option value="self">Self</option>
+                                        <option value="others">Others</option>
                                     </select>
                                 </form>
 
@@ -64,9 +101,9 @@ export default function Add({editOpen,handleditOpen}: {editOpen: boolean,handled
                                     </button>
                                 </div>
                                 <div className="flex">
-                                    <button className="p-2 bg-[#b9e9b0] rounded-md"
-                                    onClick={()=>{handleditOpen()}}>
-                                update
+                                    <button className="p-2 bg-[#b9e9b0] rounded-md "
+                                    onClick={handleClick}>
+                                Add
                                     </button>
                                 </div>
                             </div>

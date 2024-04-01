@@ -18,6 +18,7 @@ const router = express.Router();
 //create tood
 router.post("/create", tokenMiddleware_1.tokenMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
+    console.log(body);
     try {
         yield validation_1.todo.parseAsync(body);
         const id = res.locals.userId;
@@ -30,7 +31,7 @@ router.post("/create", tokenMiddleware_1.tokenMiddleware, (req, res) => __awaite
         }
         const newTodo = yield db_1.Todo.create({
             title: body.title,
-            description: validation_1.todo.description,
+            description: body.description,
             tag: body.tag
         });
         yield db_1.User.updateOne({ _id: id }, {
@@ -61,6 +62,8 @@ router.post("/update/:todoid", tokenMiddleware_1.tokenMiddleware, (req, res) => 
     const body = req.body;
     const todoId = req.params.todoid;
     const id = res.locals.userId;
+    console.log(todoId);
+    console.log(body);
     try {
         yield validation_1.todo.parseAsync(body);
         const user = yield db_1.User.findOne({ _id: id });
@@ -77,8 +80,10 @@ router.post("/update/:todoid", tokenMiddleware_1.tokenMiddleware, (req, res) => 
                 completed: body.completed
             }
         });
+        console.log(newTodo);
         return res.json({
-            message: "Updated Successfully"
+            message: "Updated Successfully",
+            newTodo
         });
     }
     catch (error) {
@@ -139,7 +144,7 @@ router.get("/get", tokenMiddleware_1.tokenMiddleware, (req, res) => __awaiter(vo
     if (!user) {
         return res.status(404).json({ message: "User not found" });
     }
-    return res.json({ todos: user });
+    return res.json({ todos: user.todos });
 }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({

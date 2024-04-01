@@ -20,9 +20,10 @@ const key = process.env.SECRET_KEY;
 function tokenMiddleware(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let token = req.headers.authorization;
+        console.log(token + "tokennnnnnn");
         if (!token || !token.startsWith("Bearer ")) {
             res.status(401).json({
-                messgae: "Please Login"
+                message: "Please Login"
             });
             return;
         }
@@ -30,17 +31,25 @@ function tokenMiddleware(req, res, next) {
         if (!key) {
             throw new Error("Provide Key");
         }
-        const { userId } = jsonwebtoken_1.default.verify(token, key);
-        //string{jwt.verify(token,key)} 
-        if (!userId) {
+        try {
+            const { userId } = jsonwebtoken_1.default.verify(token, key);
+            //string{jwt.verify(token,key)} 
+            if (!userId) {
+                res.status(401).json({
+                    message: "Please Login"
+                });
+                return;
+            }
+            // req.userId=userid;
+            res.locals.userId = userId;
+            next();
+        }
+        catch (err) {
             res.status(401).json({
                 message: "Please Login"
             });
             return;
         }
-        // req.userId=userid;
-        res.locals.userId = userId;
-        next();
     });
 }
 exports.tokenMiddleware = tokenMiddleware;

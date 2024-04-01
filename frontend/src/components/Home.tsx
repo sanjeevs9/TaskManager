@@ -14,7 +14,6 @@ export default function Home() {
   const token=localStorage.getItem("token");
   const getTodo=`${network}/api/todo/get`
   const navigate=useNavigate();
-  const [todoItem,setTodoItem]=useRecoilState(todoList);
 
   useEffect(() => {
     const animation1 = document.querySelector(".animation1");
@@ -33,27 +32,28 @@ export default function Home() {
     }
   }, []);
 
-  useEffect(() => {
-    const logo = document.querySelectorAll("#logo path");
-    for (let i = 0; i < logo.length; i++) {
-        console.log(` ${i} is ${(logo[i] as SVGPathElement).getTotalLength()}`);
-    }
-}, []);
+//   useEffect(() => {
+//     const logo = document.querySelectorAll("#logo path");
+//     for (let i = 0; i < logo.length; i++) {
+//         console.log(` ${i} is ${(logo[i] as SVGPathElement).getTotalLength()}`);
+//     }
+// }, []);
 
 
 async function verifyJwt(){
   setload(true);
+  console.log(token)
   if(token){
     try{
-      await axios.post(getTodo,{},{
+      await axios.get(`${getTodo}`,{
         headers:{
           Authorization:`Bearer ${token}`
         }
       }).then(res=>{
-        setTodoItem(res.data);
         navigate("/todo")
       })
     }catch(error){
+      console.log(error)
       navigate("/signin")
     }
     

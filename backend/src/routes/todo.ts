@@ -11,6 +11,7 @@ const router =express.Router();
 //create tood
 router.post("/create",tokenMiddleware,async(req:Request,res:Response)=>{
     const body=req.body;
+    console.log(body)
     try{
         await todo.parseAsync(body);
         const id =res.locals.userId;
@@ -22,9 +23,10 @@ router.post("/create",tokenMiddleware,async(req:Request,res:Response)=>{
             })
             return 
         }
+        
         const newTodo=await Todo.create({
             title:body.title,
-            description:todo.description,
+            description:body.description,
             tag:body.tag
         })
       
@@ -58,6 +60,8 @@ router.post("/update/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
     const body = req.body;
     const todoId=req.params.todoid;
     const id=res.locals.userId;
+    console.log(todoId)
+    console.log(body)
     try{
         await todo.parseAsync(body);
         
@@ -78,8 +82,10 @@ router.post("/update/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
                 completed:body.completed
             }
         })
+        console.log(newTodo)
         return res.json({
-            message:"Updated Successfully"
+            message:"Updated Successfully",
+            newTodo
         })
     }catch(error){
         if(error instanceof ZodError){
@@ -142,11 +148,12 @@ router.post("/delete/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
 router.get("/get",tokenMiddleware,async(req:Request,res:Response)=>{
     const id = res.locals.userId;
     console.log(id)
+
     const user = await User.findById(id).populate("todos");
     if (!user) {
         return res.status(404).json({ message: "User not found" });
     }
-    return res.json({ todos: user });
+    return res.json({ todos: user.todos });
 })
 
 

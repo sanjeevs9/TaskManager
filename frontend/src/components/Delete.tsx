@@ -1,11 +1,32 @@
+import axios from "axios";
 import { useState } from "react";
+import ReactDOM  from "react-dom";
+import { network } from "../network";
 
-export default function Delete({ toggleModal, deleteOpen }:any) {
+export default function Delete({ toggleModal, deleteOpen,id,deleteState }:any) {
+  const deleteurl=`${network}/api/todo/delete/${id}`
+  const token =localStorage.getItem("token")
+
   if (!deleteOpen) {
     return;
   }
 
-  return (
+async function handle(){
+    console.log(token)
+  await axios.post(`${deleteurl}`,{},{
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }).then(res=>{
+    console.log(res)
+    deleteState(id)
+    toggleModal()
+  }).catch(err=>{
+    console.log(err)
+  })
+}
+
+  return  ReactDOM.createPortal(
     <>
       <div>
         {deleteOpen && (
@@ -62,7 +83,7 @@ export default function Delete({ toggleModal, deleteOpen }:any) {
                     data-modal-hide="popup-modal"
                     type="button"
                     className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
-                    onClick={toggleModal}
+                    onClick={handle}
                   >
                     Yes, I'm sure
                   </button>
@@ -80,6 +101,7 @@ export default function Delete({ toggleModal, deleteOpen }:any) {
           </div>
         )}
       </div>
-    </>
+    </>,
+    document.getElementById("delete")
   );
 }

@@ -3,6 +3,7 @@ import { network } from "../network";
 import "../App.css"
 import cupgirl from "../assets/images/Person1.png"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 type formType = "signup" | "signin";
 
@@ -12,7 +13,34 @@ export default function AuthForm({ formType }: { formType: formType }) {
   const signin = `${network}/api/user/signin`;
   const navigate =useNavigate();
 
-  function handle() {}
+  function handle() {
+    console.log(data)
+      if(formType=="signup"){
+        axios.post(`${signUp}`,{
+          username:data.username,
+          password:data.password
+        }).then(res=>{
+          alert(res.data.message)
+          console.log(res.data.token)
+          localStorage.setItem("token",res.data.token)
+          navigate("/todo")
+        }).catch(error=>{
+          alert(error.response.data.message)
+          console.log(error)
+        })
+      }else{
+        axios.post(`${signin}`,{username:data.username,
+          password:data.password}).then(res=>{
+          alert(res.data.message)
+          localStorage.setItem("token",res.data.token)
+          navigate("/todo")
+        }).catch(error=>{
+          alert(error.response.data.message)
+          console.log(error.response.data)
+          
+        })
+      }
+  }
 
   return (
     <>
@@ -50,6 +78,13 @@ export default function AuthForm({ formType }: { formType: formType }) {
             <button className="bg-[#69665c] p-3 text-white rounded-md" onClick={handle}>
               {formType == "signup" ? "Sign Up" : "Signin"}
             </button>
+            <div className="text-sm"> 
+              {formType=="signin"?<div>
+              Dont Have an Account? <span className="underline cursor-pointer"onClick={()=>{navigate("/signup")}}>Create</span>
+              </div> :<div>
+              Already Have an account? <span className="underline cursor-pointer" onClick={()=>{navigate("/signin")}}>Login</span>
+                </div>}
+            </div>
           </div>
         </div>
       </div>

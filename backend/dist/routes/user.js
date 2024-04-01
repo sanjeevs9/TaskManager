@@ -91,6 +91,7 @@ router.post("/signUp", (req, res) => __awaiter(void 0, void 0, void 0, function*
 //signin
 router.post("/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
+    console.log(body);
     try {
         yield validation_1.user.parseAsync(body);
         const existuser = yield db_1.User.findOne({
