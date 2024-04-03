@@ -20,3 +20,4 @@ app.get("/",async(req:Request,res:Response)=>{
 
 
 app.listen(PORT);
+export default app;
