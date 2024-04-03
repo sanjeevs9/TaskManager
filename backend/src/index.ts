@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 const express = require('express');
 const cors=require("cors")
 const mainRouter=require("./routes/index")
-const PORT = 3000;
+const PORT = 5000;
 
 
 const app = express();
@@ -20,3 +20,5 @@ app.get("/",async(req:Request,res:Response)=>{
 
 
 app.listen(PORT);
+
+export default app;
