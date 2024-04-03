@@ -10,7 +10,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dist": "./dist/index.js"
+            "dest": "./dist/index.js"
         }
     ]
 }
