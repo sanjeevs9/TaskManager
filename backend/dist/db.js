@@ -70,3 +70,4 @@ const User = mongoose_1.default.model("user", userSchema);
 exports.User = User;
 const Todo = mongoose_1.default.model("todo", todoSchema);
 exports.Todo = Todo;
+//# sourceMappingURL=db.js.map

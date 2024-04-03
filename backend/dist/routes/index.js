@@ -21,3 +21,4 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     });
 }));
 module.exports = router;
+//# sourceMappingURL=index.js.map

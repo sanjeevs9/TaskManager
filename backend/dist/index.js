@@ -23,3 +23,4 @@ app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     });
 }));
 app.listen(PORT);
+//# sourceMappingURL=index.js.map

@@ -53,3 +53,4 @@ function tokenMiddleware(req, res, next) {
     });
 }
 exports.tokenMiddleware = tokenMiddleware;
+//# sourceMappingURL=tokenMiddleware.js.map
