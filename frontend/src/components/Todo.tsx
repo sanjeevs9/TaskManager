@@ -110,14 +110,17 @@ export default function Todo() {
   }
   //delete
   async function deleteState(id: string) {
-    const deleted=todo.filter((x)=>x._id !==id)
+    console.log("curr")
+    console.log(curr)
+    const deleted=curr.filter((x)=>x._id !==id)
+    console.log(deleted)
     console.log(deleted.length+"lengh")
     console.log(currrentPage+"curr")
     console.log(deleted.length %4 ==0 )
-    if(deleted.length % 4!=0 && currrentPage>1){
+    if(deleted.length % 4===0 && currrentPage>1){
       prevPage();
     }
-    setTodo(deleted)
+    setcurr(deleted)
     
   }
 //addd
