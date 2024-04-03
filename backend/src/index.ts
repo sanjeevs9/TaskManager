@@ -4,9 +4,11 @@ const cors=require("cors")
 const mainRouter=require("./routes/index")
 const PORT = 3000;
 
+
 const app = express();
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
+
 
 app.use("/api",mainRouter)
 
