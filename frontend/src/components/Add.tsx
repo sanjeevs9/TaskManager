@@ -83,9 +83,9 @@ export default function Add({editOpen,handleditOpen,addState}: {editOpen: boolea
                                     <select id="tag" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     onChange={(e)=>{setSelectedtag(e.target.value)}}>
                                         <option value="work">Work</option>
-                                        <option value="life">Life</option>
+                                        <option value="study">Study</option>
                                         <option value="self">Self</option>
-                                        <option value="others">Others</option>
+                                        <option value="other">Others</option>
                                     </select>
                                 </form>
 

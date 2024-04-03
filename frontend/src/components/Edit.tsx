@@ -19,6 +19,7 @@ title:string,description:string,tag:string,completed:boolean,id:string,updateSta
         description:data.description,
         tag:tagg,
         completed,
+        _id:id
     }
        await axios.post(`${update}`,{
         title:data.title,
@@ -83,7 +84,7 @@ title:string,description:string,tag:string,completed:boolean,id:string,updateSta
                                     
                                     onChange={(e)=>{settagg(e.target.value)}}>
                                         <option value="work">work</option>
-                                        <option value="life">Life</option>
+                                        <option value="study">Study</option>
                                         <option value="self">Self</option>
                                         <option value="other">Other</option>
                                     </select>

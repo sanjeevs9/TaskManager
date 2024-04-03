@@ -63,7 +63,7 @@ export default function Card({width,height,title,description,tag,id,completed,up
                 </div>
                 <div className={`${width} ${height} bg-[#fff9de] px-4 py-5  rounded-sm shadow-xl relative `}  >
                     <div className='flex justify-between pb-1'>
-                        <div className={`${isChecked?`line-through`:""}  flex text-[#69665c] font-extrabold font-foundation text-lg overflow-hidden overflow-y-hidden `}>
+                        <div className={`${isChecked?`line-through`:""}  flex text-[#69665c] font-extrabold font-foundation text-lg overflow-hidden overflow-y-hidden h-8 `}>
                         {title}
                         </div>
                         <div className='h-10 w-10  -translate-y-3 flex' onClick={handleOpen}>
@@ -100,7 +100,7 @@ export default function Card({width,height,title,description,tag,id,completed,up
                        }
                     </div>
 
-                    <div className={`${isChecked === true ? 'line-through' : ''} overflow-hidden pb-9  font-kalam text-[#69665c] max-h-[3rem] `}>
+                    <div className={`${isChecked === true ? 'line-through' : ''} overflow-hidden pb-9  font-kalam text-[#69665c] h-[3rem] lg:h-[4.6rem] 2xl:h-[5.9rem] `}>
                         
                       {description}
 
