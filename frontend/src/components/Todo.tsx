@@ -75,14 +75,13 @@ export default function Todo() {
     const filterdata=todo.filter(x=>x.tag==tag)
     const lastTodo=currrentPage* todosInPage;
     const FirstTodoIndex=lastTodo-todosInPage;
-    console.log(FirstTodoIndex+"first")
-    console.log(lastTodo+"last")
+   
    const LP=lastTodo>=filterdata.length || filterdata.length<=4
    setlastPage(LP)
-   console.log(LP)
+
     const c=filterdata.slice(FirstTodoIndex,lastTodo);
     setcurr(c)
-    console.log(c)
+  
   },[todo,tag,currrentPage])
 
   //update 
@@ -102,13 +101,9 @@ export default function Todo() {
   }
   //delete
   async function deleteState(id: string) {
-    console.log("curr")
-    console.log(curr)
+   
     const deleted=curr.filter((x)=>x._id !==id)
-    console.log(deleted)
-    console.log(deleted.length+"lengh")
-    console.log(currrentPage+"curr")
-    console.log(deleted.length %4 ==0 )
+
     if(deleted.length % 4===0 && currrentPage>1){
       prevPage();
     }

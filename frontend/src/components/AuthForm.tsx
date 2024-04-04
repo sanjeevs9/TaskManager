@@ -14,19 +14,19 @@ export default function AuthForm({ formType }: { formType: formType }) {
   const navigate =useNavigate();
 
   function handle() {
-    console.log(data)
+  
       if(formType=="signup"){
         axios.post(`${signUp}`,{
           username:data.username,
           password:data.password
         }).then(res=>{
           alert(res.data.message)
-          console.log(res.data.token)
+        
           localStorage.setItem("token",res.data.token)
           navigate("/todo")
         }).catch(error=>{
           alert(error.response.data.message)
-          console.log(error)
+      
         })
       }else{
         axios.post(`${signin}`,{username:data.username,
@@ -36,7 +36,7 @@ export default function AuthForm({ formType }: { formType: formType }) {
           navigate("/todo")
         }).catch(error=>{
           alert(error.response.data.message)
-          console.log(error.response.data)
+    
           
         })
       }
