@@ -40,7 +40,7 @@ export default function Home() {
 
 async function verifyJwt(){
   setload(true);
-  console.log(token)
+  
   if(token){
     try{
       await axios.get(`${getTodo}`,{
@@ -51,8 +51,8 @@ async function verifyJwt(){
         navigate("/todo")
         
       })
-    }catch(error){
-      console.log(error)
+    }catch(_){
+     
       navigate("/signin")
     }
     

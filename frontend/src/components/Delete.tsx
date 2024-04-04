@@ -15,17 +15,17 @@ export default function Delete({ toggleModal, deleteOpen,id,deleteState }:any) {
   }
 
 async function handle(){
-    console.log(token)
+  
   await axios.post(`${deleteurl}`,{},{
     headers:{
       Authorization:`Bearer ${token}`
     }
-  }).then(res=>{
-    console.log(res)
+  }).then(_=>{
+
     deleteState(id)
     toggleModal()
-  }).catch(err=>{
-    console.log(err)
+  }).catch(_=>{
+  
   })
 }
 

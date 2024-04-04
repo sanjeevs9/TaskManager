@@ -29,13 +29,13 @@ export default function Add({editOpen,handleditOpen,addState}: {editOpen: boolea
                 Authorization:`Bearer ${token}`
             }
         }).then(res=>{
-            console.log(res.data.newTodo)
+           
             addState(res.data.newTodo)
             alert(res.data.message)
             handleditOpen()
             
         }).catch(error=>{
-            console.log(error)
+           
             alert(error.response.data.message)
             handleditOpen()
         })

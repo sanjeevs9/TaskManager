@@ -37,13 +37,13 @@ if (!element) {
             Authorization:`Bearer ${token}`
         }
        }
-       ).then((res)=>{
-            console.log(res.data.message)
+       ).then((_)=>{
+           
             updateState(value)
             handleditOpen()
        }).catch(err=>{
         alert(err.response)
-        console.log(err.response)
+       
        })
     }
 

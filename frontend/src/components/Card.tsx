@@ -33,10 +33,10 @@ export default function Card({width,height,title,description,tag,id,completed,up
                 Authorization:`Bearer ${token}`
             }
         }
-        ).then(res=>{
-            console.log(res.data)
+        ).then(_=>{
+      
         }).catch(err=>{
-            console.log(err)
+           
             alert(err)
         })
     }
@@ -48,7 +48,7 @@ export default function Card({width,height,title,description,tag,id,completed,up
     }
     function handleditOpen(){
         seteditOpen(!editOpen)
-        console.log(editOpen)
+       
     }
     function handleDeleteOpen(){
         setdeleOpen(!deleteOpen)

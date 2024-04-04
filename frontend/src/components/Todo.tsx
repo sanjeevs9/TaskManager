@@ -57,13 +57,13 @@ export default function Todo() {
         })
           .then(res => {
             setTodo(res.data.todos.reverse())
-            console.log(todo)
-          }).catch(error => {
-            console.log(error)
-            //navigate("/signin")
+          
+          }).catch(_ => {
+           
+            navigate("/signin")
           })
       } catch (error: any) {
-        console.log(error)
+       
         //navigate("/signin")
       }
     } else {
