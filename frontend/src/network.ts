@@ -1,1 +1,1 @@
-export const network="https://backend-task-mcx0kxqjm-sanjeevs9s-projects.vercel.app"
+export const network="https://backend-task-omega.vercel.app/"
