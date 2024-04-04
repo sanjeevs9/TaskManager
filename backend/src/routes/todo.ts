@@ -147,7 +147,7 @@ router.post("/delete/:todoid",tokenMiddleware,async(req:Request,res:Response)=>{
 //get todo
 router.get("/get",tokenMiddleware,async(req:Request,res:Response)=>{
     const id = res.locals.userId;
-    console.log(id)
+    
 
     const user = await User.findById(id).populate("todos");
     if (!user) {

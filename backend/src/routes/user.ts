@@ -5,10 +5,7 @@ import {User} from "../db"
 import jwt from "jsonwebtoken"
 import * as dotenv from "dotenv"
 import { ZodError, string } from "zod";
-import { tokenMiddleware } from "../middlware/tokenMiddleware";
-import { emitWarning } from "process";
-import { moveMessagePortToContext } from "worker_threads";
-import { Mongoose, Error as MongooseError } from "mongoose";
+
 dotenv.config()
 const key=process.env.SECRET_KEY;
 const router =express.Router();
@@ -16,7 +13,6 @@ const router =express.Router();
 //create user
 router.post("/signUp",async(req:Request,res:Response)=>{
 const body=req.body;
-console.log(body)
 try{
     const valid=await user.parseAsync(body);
     if(!valid){
@@ -49,7 +45,6 @@ const token =jwt.sign({userId},key);
  
 
 }catch(error:unknown){
-    console.log(error)
    
    if(error instanceof ZodError){
       return  res.json({
@@ -67,7 +62,6 @@ const token =jwt.sign({userId},key);
 //signin
 router.post("/signin",async(req:Request,res:Response)=>{
     const body = req.body;
-    console.log(body)
     try{
        await user.parseAsync(body);
         
