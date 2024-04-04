@@ -3,7 +3,7 @@ import { useState } from "react"
 import  ReactDOM  from "react-dom"
 import { network } from "../network"
 
-export default function Edit({editOpen,handleditOpen,title,tag,description,completed,id,updateState}: {editOpen: boolean,handleditOpen:Function,
+export default function Edit({editOpen,handleditOpen,title,description,completed,id,updateState}: {editOpen: boolean,handleditOpen:Function,
 title:string,description:string,tag:string,completed:boolean,id:string,updateState:Function}) {
     if(!editOpen){
         return
@@ -12,6 +12,12 @@ title:string,description:string,tag:string,completed:boolean,id:string,updateSta
     const [tagg,settagg]=useState("work")
     const update=`${network}/api/todo/update/${id}`
     const token=localStorage.getItem("token")
+
+    const element = document.getElementById("update");
+if (!element) {
+  // Call your function here
+  return
+} 
 
   async  function handle(){
     const value={
@@ -121,7 +127,7 @@ title:string,description:string,tag:string,completed:boolean,id:string,updateSta
 
 
         </>,
-          document.getElementById("update")
+          element
     )
   
 }

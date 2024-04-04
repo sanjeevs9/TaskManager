@@ -1,8 +1,6 @@
-import { useState } from 'react'
+
 import './App.css'
 import { Route,Routes,BrowserRouter } from 'react-router-dom'
-import Card from './components/Card'
-import Edit from './components/Edit'
 import Home from './components/Home'
 import Todo from './components/Todo'
 import Signup from './components/SignUp'

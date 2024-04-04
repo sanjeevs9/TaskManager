@@ -5,8 +5,6 @@ import hometodo from "../assets/images/hometodo.png"
 import {network} from "../../src/network"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useRecoilState } from "recoil";
-import { todoList } from "../atom";
 
 export default function Home() {
   const [displayAnimation, setDisplayAnimation] = useState(true);
@@ -49,8 +47,9 @@ async function verifyJwt(){
         headers:{
           Authorization:`Bearer ${token}`
         }
-      }).then(res=>{
+      }).then(_=>{
         navigate("/todo")
+        
       })
     }catch(error){
       console.log(error)

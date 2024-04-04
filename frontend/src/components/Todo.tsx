@@ -8,21 +8,13 @@ import yoga from "../assets/images/MeditatingDoodle.png"
 import Add from "./Add"
 import dance from "../assets/images/DancingDoodle.png"
 import { useEffect, useState } from "react"
-import { useRecoilState } from "recoil"
-import { todoList } from "../atom"
 import axios from "axios"
 import { network } from "../network"
 import Card from "./Card"
-import { get } from "mongoose"
 import leftArrow from "../assets/images/left-arrow-backup-2-svgrepo-com.svg"
 import rightArrow from "../assets/images/right-arrow-backup-2-svgrepo-com.svg"
 
-interface tag {
-  work: string,
-  study: string,
-  self: string,
-  other: string
-}
+
 interface AddValue{
   title:string,
   description:string,
@@ -161,7 +153,7 @@ export default function Todo() {
             <div className="flex md:flex-col gap-3 sm:gap-6 md:h-[40rem]  justify-center md:pt-4  w-full   md:w-52 xl:w-44 pt-16 pl-10 sm:pl-0">
               <button
                 className="bg-[#f5f5f5] flex p-2 gap-1 sm:gap-2 rounded-md items-center  hover-effect hover:shadow-lg  hover:bg-white"
-                onClick={(e) => { setTag("work")
+                onClick={() => { setTag("work")
                 setCurrPage(1)}}
               >
                 <div className="md:pl-1 w-6 md:w-auto md:ml-1">
@@ -173,7 +165,7 @@ export default function Todo() {
               </button>
               <button value="study"
                 className="bg-[#f5f5f5] flex p-2  gap-1 sm:gap-2 rounded-md  items-center  hover-effect hover:shadow-lg  hover:bg-white "
-                onClick={(e) => {setTag("study")
+                onClick={() => {setTag("study")
                 setCurrPage(1)}}
               >
 
@@ -186,7 +178,7 @@ export default function Todo() {
               </button>
               <button
                 className="bg-[#f5f5f5] flex p-2  gap-1 sm:gap-2 rounded-md  items-center hover-effect hover:shadow-lg  hover:bg-white "
-                onClick={(e) => {setTag("self")
+                onClick={() => {setTag("self")
               setCurrPage(1)}}
               >
                 <div className="sm:pl-1 w-6 sm:ml-1 sm:w-auto">
@@ -198,7 +190,7 @@ export default function Todo() {
               </button>
               <button
                 className="bg-[#f5f5f5] flex p-2  gap-1 sm:gap-2 rounded-md  items-center hover-effect hover:shadow-lg  hover:bg-white "
-                onClick={(e) => {setTag("other")
+                onClick={() => {setTag("other")
                 setCurrPage(1)}}
               >
                 <div className="sm:pl-1 w-6 sm:ml-1 sm:w-auto">

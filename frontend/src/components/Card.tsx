@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import "../App.css"
 import Edit from './Edit';
@@ -107,7 +107,7 @@ export default function Card({width,height,title,description,tag,id,completed,up
                     </div>
                     <div className='flex  justify-between items-end  absolute bottom-0 inset-x-4 pb-5 '>
                         <div className='h-8 w-8 sm:h-10 sm:w-10'>
-                            {tag=="other"?<img src={purple}></img>:
+                            {tag=="other"?<img src={blue}></img>:
                             tag=="work"?<img src={red}></img>:
                             tag=="study"?<img src={green}></img>:
                            tag=="self"?<img src={purple}></img>:

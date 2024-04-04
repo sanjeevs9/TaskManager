@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
 import ReactDOM  from "react-dom";
 import { network } from "../network";
 
 export default function Delete({ toggleModal, deleteOpen,id,deleteState }:any) {
   const deleteurl=`${network}/api/todo/delete/${id}`
   const token =localStorage.getItem("token")
+  const deleteelement=  document.getElementById("delete")
+  if(!deleteelement){
+    return
+  }
 
   if (!deleteOpen) {
     return;
@@ -102,6 +105,6 @@ async function handle(){
         )}
       </div>
     </>,
-    document.getElementById("delete")
+    deleteelement
   );
 }
