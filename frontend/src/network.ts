@@ -1,1 +1,1 @@
-export const network="http://localhost:5000"
+export const network="https://backend-task-omega.vercel.app"
